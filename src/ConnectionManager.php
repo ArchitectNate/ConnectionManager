@@ -1,18 +1,22 @@
 <?php
-    class DatabaseManager {
- 
-        private static $_instances = array();
- 
-        public static function getInstance($instance_name, $connection_info = array()) {
-            if($connection_info) {
-                list($db_host, $db_user, $db_pass, $db_name) = $connection_info;
-                self::$_instances[$instance_name] = new MySQLi($db_host, $db_user, $db_pass, $db_name);
-            }
-            return self::$_instances[$instance_name];
+namespace TPE\ConnectionManager;
+
+class ConnectionManager {
+
+    private static $instances = array();
+
+    public static function getInstance($instance_name='default', $connection) {
+        if($connection) {
+            self::$instances[$instance_name] = $connection;
         }
+
+        if(array_key_exists($instance_name, self::$instances))
+        {
+            return self::$instances[$instance_name];
+        }
+
+        return null;
     }
- 
-    function db($instance_name='default', $connection_info = array()){
-        return DatabaseManager::getInstance($instance_name, $connection_info);
-    }
+}
+
 ?>

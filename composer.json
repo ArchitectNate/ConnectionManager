@@ -22,7 +22,8 @@
     "autoload": {
         "psr-4": {
             "TPE\\ConnectionManager\\": "src/"
-        }
+        },
+        "files": ["src/db.php"]
     },
     "autoload-dev": {
         "psr-4": {
